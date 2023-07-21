@@ -17,6 +17,33 @@
         "revision" : "40489273ee4703032c7d4d185ac25743f604e158",
         "version" : "1.0.0"
       }
+    },
+    {
+      "identity" : "rsbarcodes_swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yeahdongcn/RSBarcodes_Swift",
+      "state" : {
+        "revision" : "241de72a96f49b1545d5de3c00fae170c2675c41",
+        "version" : "5.2.0"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "633996a807442ec28df9d33b0f88ce57a0e2fdbf",
+        "version" : "5.17.0"
+      }
+    },
+    {
+      "identity" : "sdwebimageswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI",
+      "state" : {
+        "revision" : "e837c37d45449fbd3b4745c10c5b5274e73edead",
+        "version" : "2.2.3"
+      }
     }
   ],
   "version" : 2
