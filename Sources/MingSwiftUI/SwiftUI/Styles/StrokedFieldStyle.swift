@@ -10,17 +10,16 @@ import SwiftUI
 public struct StrokedFieldStyle: ViewModifier {
     @Environment(\.colorScheme) private var colorSchema
     
-    public var isStroke: Bool
     public var strokeColor: Color
+    public var backgroundColor: Color?
+    public var radius: Double
+    public var lineWidth: Double
 
-    private let radius: Double = 8
-    private let backgroundColorLight: Color = Color(UIColor.systemGroupedBackground)
-    private let backgroundColorDark: Color = Color(UIColor.tertiarySystemBackground)
-    private let lineWidth: Double = 1
-
-    public init(isStroke: Bool, strokeColor: Color) {
-        self.isStroke = isStroke
+    public init(strokeColor: Color = Color(UIColor.systemPink), backgroundColor: Color? = nil, radius: Double = 8, lineWidth: Double = 1) {
         self.strokeColor = strokeColor
+        self.backgroundColor = backgroundColor
+        self.radius = radius
+        self.lineWidth = lineWidth
     }
 
     public func body(content: Content) -> some View {
@@ -29,26 +28,41 @@ public struct StrokedFieldStyle: ViewModifier {
             .background(
                 Rectangle()
                     .foregroundColor(.clear)
-                    .background(colorSchema == .dark ?  backgroundColorDark : backgroundColorLight)
+                    .background(fieldBackgroundColor)
                     .cornerRadius(radius)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: radius)
-                    .stroke(isStroke ? strokeColor : .clear, lineWidth: lineWidth)
+                    .stroke(strokeColor, lineWidth: CGFloat(lineWidth))
             )
+    }
+    
+    var fieldBackgroundColor: Color {
+        if let color = backgroundColor {
+            return color
+        } else {
+            return colorSchema == .dark ?  Color(UIColor.tertiarySystemBackground) : Color(UIColor.systemGroupedBackground)
+        }
     }
 }
 
 public extension View {
-    func strokedFieldStyle(isStroke: Bool = false, strokeColor: Color = Color(UIColor.systemPink)) -> some View {
-        modifier(StrokedFieldStyle(isStroke: isStroke, strokeColor: strokeColor))
+    func strokedFieldStyle(strokeColor: Color = Color(UIColor.systemPink), backgroundColor: Color? = nil, radius: Double = 8, lineWidth: Double = 1) -> some View {
+        modifier(StrokedFieldStyle(strokeColor: strokeColor, backgroundColor: backgroundColor, radius: radius, lineWidth: lineWidth))
     }
 }
 
 struct StrokedFieldStyle_Previews: PreviewProvider {
     static var previews: some View {
-        TextField("Enter text", text: .constant(""))
-                    .strokedFieldStyle(isStroke: true, strokeColor: .red)
-                    .padding()
+        VStack {
+            TextField("Enter text", text: .constant(""))
+                .strokedFieldStyle(strokeColor: .red)
+            
+            Text("Hello World")
+                .strokedFieldStyle(strokeColor: .red, backgroundColor: .green, radius: 12, lineWidth: 3)
+        }
+        .padding()
     }
 }
+
+

@@ -8,14 +8,18 @@
 import SwiftUI
 
 public struct BorderedArrowStyle: ViewModifier {
-    let backgroundColor: Color
-    let strokeColor: Color
     let arrowColor: Color
-    
-    public init(backgroundColor: Color = .clear, strokeColor: Color = Color(red: 0.83, green: 0.83, blue: 0.85), arrowColor: Color = .primary) {
-        self.backgroundColor = backgroundColor
+    let strokeColor: Color
+    let backgroundColor: Color?
+    let radius: Double
+    let lineWidth: Double
+
+    public init(strokeColor: Color = Color(red: 0.83, green: 0.83, blue: 0.85), backgroundColor: Color? = nil, arrowColor: Color = .primary, radius: Double = 8, lineWidth: Double = 1) {
         self.strokeColor = strokeColor
+        self.backgroundColor = backgroundColor
         self.arrowColor = arrowColor
+        self.radius = radius
+        self.lineWidth = lineWidth
     }
 
     public func body(content: Content) -> some View {
@@ -28,22 +32,13 @@ public struct BorderedArrowStyle: ViewModifier {
                 .foregroundColor(arrowColor)
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
-        .padding()
-        .background(
-            Rectangle()
-                .foregroundColor(backgroundColor)
-                .cornerRadius(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(strokeColor, lineWidth: 1)
-                )
-        )
+        .strokedFieldStyle(strokeColor: strokeColor, backgroundColor: backgroundColor, radius: radius, lineWidth: lineWidth)
     }
 }
 
 public extension View {
-    func borderedArrowStyle(backgroundColor: Color = .clear, strokeColor: Color = Color(red: 0.83, green: 0.83, blue: 0.85), arrowColor: Color = .primary) -> some View {
-        self.modifier(BorderedArrowStyle(backgroundColor: backgroundColor, strokeColor: strokeColor, arrowColor: arrowColor))
+    func borderedArrowStyle(strokeColor: Color = Color(red: 0.83, green: 0.83, blue: 0.85), backgroundColor: Color? = nil, arrowColor: Color = .primary, radius: Double = 8, lineWidth: Double = 1) -> some View {
+        self.modifier(BorderedArrowStyle(strokeColor: strokeColor, backgroundColor: backgroundColor, arrowColor: arrowColor, radius: radius, lineWidth: lineWidth))
     }
 }
 
@@ -52,7 +47,7 @@ struct BorderedArrowStyleModifier_Previews: PreviewProvider {
         VStack {
             Text("Hello, World!")
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .borderedArrowStyle()
+                .borderedArrowStyle(backgroundColor: .clear)
                 .padding(.horizontal)
             
             HStack {
@@ -62,9 +57,11 @@ struct BorderedArrowStyleModifier_Previews: PreviewProvider {
                 Text("description")
                     .foregroundColor(Color.primary)
             }
-            .borderedArrowStyle()
+            .borderedArrowStyle(strokeColor: .clear)
             .padding(.horizontal)
         }
     }
 }
+
+
 
