@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct RoundedBackgroundStyleModifier: ViewModifier {
+public struct RoundedBackgroundStyle: ViewModifier {
     @Environment(\.colorScheme) var colorScheme
 
     public func body(content: Content) -> some View {
@@ -23,7 +23,7 @@ public struct RoundedBackgroundStyleModifier: ViewModifier {
 
 public extension View {
     func roundedBackgroundStyle() -> some View {
-        self.modifier(RoundedBackgroundStyleModifier())
+        self.modifier(RoundedBackgroundStyle())
     }
 }
 

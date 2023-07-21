@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct CapsuleStyleModifier: ViewModifier {
+public struct CapsuleStyle: ViewModifier {
     let textColor: Color
     let backgroundColor: Color
     let strokeColor: Color
@@ -32,7 +32,7 @@ public struct CapsuleStyleModifier: ViewModifier {
 
 public extension View {
     func capsuleStyle(textColor: Color = .white, backgroundColor: Color = .accentColor, strokeColor: Color = .clear) -> some View {
-        self.modifier(CapsuleStyleModifier(textColor: textColor, backgroundColor: backgroundColor, strokeColor: strokeColor))
+        self.modifier(CapsuleStyle(textColor: textColor, backgroundColor: backgroundColor, strokeColor: strokeColor))
     }
 }
 

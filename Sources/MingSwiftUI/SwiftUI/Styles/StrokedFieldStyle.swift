@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct StrokedFieldStyleModifier: ViewModifier {
+public struct StrokedFieldStyle: ViewModifier {
     @Environment(\.colorScheme) private var colorSchema
     
     public var isStroke: Bool
@@ -41,7 +41,7 @@ public struct StrokedFieldStyleModifier: ViewModifier {
 
 public extension View {
     func strokedFieldStyle(isStroke: Bool = false, strokeColor: Color = Color(UIColor.systemPink)) -> some View {
-        modifier(StrokedFieldStyleModifier(isStroke: isStroke, strokeColor: strokeColor))
+        modifier(StrokedFieldStyle(isStroke: isStroke, strokeColor: strokeColor))
     }
 }
 

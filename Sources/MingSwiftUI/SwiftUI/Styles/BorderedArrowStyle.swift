@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct BorderedArrowStyleModifier: ViewModifier {
+public struct BorderedArrowStyle: ViewModifier {
     let backgroundColor: Color
     let strokeColor: Color
     let arrowColor: Color
@@ -45,7 +45,7 @@ public struct BorderedArrowStyleModifier: ViewModifier {
 
 public extension View {
     func borderedArrowStyle(backgroundColor: Color = .clear, strokeColor: Color = Color(red: 0.83, green: 0.83, blue: 0.85), arrowColor: Color = .primary) -> some View {
-        self.modifier(BorderedArrowStyleModifier(backgroundColor: backgroundColor, strokeColor: strokeColor, arrowColor: arrowColor))
+        self.modifier(BorderedArrowStyle(backgroundColor: backgroundColor, strokeColor: strokeColor, arrowColor: arrowColor))
     }
 }
 
