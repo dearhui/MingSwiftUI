@@ -21,8 +21,6 @@ public struct BorderedArrowStyle: ViewModifier {
     public func body(content: Content) -> some View {
         HStack(spacing: 4) {
             content
-
-            Spacer()
             
             Image(systemName: "arrowtriangle.down.fill")
                 .resizable()
@@ -51,9 +49,22 @@ public extension View {
 
 struct BorderedArrowStyleModifier_Previews: PreviewProvider {
     static var previews: some View {
-        Text("Hello, World!")
+        VStack {
+            Text("Hello, World!")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .borderedArrowStyle()
+                .padding(.horizontal)
+            
+            HStack {
+                Text("title")
+                    .foregroundColor(.primary)
+                Spacer()
+                Text("description")
+                    .foregroundColor(Color.primary)
+            }
             .borderedArrowStyle()
-            .padding()
+            .padding(.horizontal)
+        }
     }
 }
 

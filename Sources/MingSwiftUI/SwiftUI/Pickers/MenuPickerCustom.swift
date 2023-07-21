@@ -36,6 +36,9 @@ struct MenuPickerCustom_Previews: PreviewProvider {
     static var previews: some View {
         MenuPickerCustom(options: ["Option 1", "Option 2"], selection: .constant("Option 2")) { item in
             Text(item.description)
+                .foregroundColor(.primary)
+                .borderedArrowStyle()
         }
+        .padding()
     }
 }
