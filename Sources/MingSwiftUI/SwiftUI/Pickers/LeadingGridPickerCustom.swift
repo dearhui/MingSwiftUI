@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct TagGridPicker<Item: Hashable & CustomStringConvertible, Content: View>: View {
+public struct LeadingGridPickerCustom<Item: Hashable & CustomStringConvertible, Content: View>: View {
     public var items: [Item]
     @Binding public var selection: Item
     public var content: (Item, Bool) -> Content
@@ -19,7 +19,7 @@ public struct TagGridPicker<Item: Hashable & CustomStringConvertible, Content: V
     }
 
     public var body: some View {
-        TagGridViewCustom(tags: items) { item in
+        LeadingGridCustom(tags: items) { item in
             Button {
                 self.selection = item
             } label: {
@@ -41,7 +41,7 @@ struct TagGridPickerView_Previews: PreviewProvider {
     @State private static var selection: Options = .secondOption
 
     static var previews: some View {
-        TagGridPicker(items: Options.allCases, selection: $selection) { (item, selected)  in
+        LeadingGridPickerCustom(items: Options.allCases, selection: $selection) { (item, selected)  in
             if selected {
                 Text(item.description)
                     .padding(.vertical, 6)

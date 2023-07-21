@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct TagGridViewCustom<Content: View, Item: Hashable & CustomStringConvertible>: View {
+public struct LeadingGridCustom<Content: View, Item: Hashable & CustomStringConvertible>: View {
     public var tags: [Item]
     public var content: (Item) -> Content
     @State private var totalHeight = CGFloat.zero
@@ -73,7 +73,7 @@ public struct TagGridViewCustom<Content: View, Item: Hashable & CustomStringConv
 
 struct TagGridView_Previews: PreviewProvider {
     static var previews: some View {
-        TagGridViewCustom(tags: ["Hello", "World", "test", "demo", "macbook pro", "apple air pods", "rock", "a"]) { text in
+        LeadingGridCustom(tags: ["Hello", "World", "test", "demo", "macbook pro", "apple air pods", "rock", "a"]) { text in
             Text(text)
                 .padding(.vertical, 2)
                 .padding(.horizontal, 12)
