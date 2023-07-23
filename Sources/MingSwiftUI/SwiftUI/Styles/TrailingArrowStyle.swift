@@ -53,6 +53,11 @@ struct TrailingArrowStyleModifier_Previews: PreviewProvider {
             }
             .trailingArrowStyle(arrowColor: .red)
             .padding(.horizontal)
+            
+            Text("886")
+                .trailingArrowStyle()
+                .padding()
+                .roundedBackgroundStyle(.field)
         }
     }
 }

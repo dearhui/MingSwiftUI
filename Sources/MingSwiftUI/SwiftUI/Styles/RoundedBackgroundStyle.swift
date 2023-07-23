@@ -63,7 +63,7 @@ public struct RoundedBackgroundStyle: ViewModifier {
 }
 
 public extension View {
-    func roundedBackgroundStyle(style: RoundedBackgroundStyleType = .standard) -> some View {
+    func roundedBackgroundStyle(_ style: RoundedBackgroundStyleType = .standard) -> some View {
         self.modifier(RoundedBackgroundStyle(style: style))
     }
 }
@@ -73,33 +73,33 @@ struct RoundedBackgroundStyleModifier_Previews: PreviewProvider {
         VStack {
             Text("Hello, World!\nHello, World!")
                 .padding()
-                .roundedBackgroundStyle(style: .standard)
+                .roundedBackgroundStyle(.standard)
             
             Text("Hello, World!\nHello, World!")
                 .padding()
-                .roundedBackgroundStyle(style: .stroked)
+                .roundedBackgroundStyle(.stroked)
 
             Text("Hello, World!")
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()
-                .roundedBackgroundStyle(style: .button)
+                .roundedBackgroundStyle(.button)
             
             Text("Hello, World!")
                 .foregroundColor(.white)
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()
-                .roundedBackgroundStyle(style: .buttonColor(.yellow))
+                .roundedBackgroundStyle(.buttonColor(.yellow))
             
             TextField("Please Input text", text: .constant(""))
                 .padding()
-                .roundedBackgroundStyle(style: .field)
+                .roundedBackgroundStyle(.field)
             
             TextField("Please Input text", text: .constant(""))
                 .padding()
-                .roundedBackgroundStyle(style: .fieldError)
+                .roundedBackgroundStyle(.fieldError)
         }
         .padding()
     }
