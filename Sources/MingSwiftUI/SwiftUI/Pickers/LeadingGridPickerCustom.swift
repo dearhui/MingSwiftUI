@@ -29,7 +29,7 @@ public struct LeadingGridPickerCustom<Item: Hashable & CustomStringConvertible, 
     }
 }
 
-struct TagGridPickerView_Previews: PreviewProvider {
+struct LeadingGridPickerCustom_Previews: PreviewProvider {
     enum Options: String, CaseIterable, Hashable, CustomStringConvertible {
             case firstOption = "First"
             case secondOption = "Second"
@@ -46,12 +46,12 @@ struct TagGridPickerView_Previews: PreviewProvider {
                 Text(item.description)
                     .padding(.vertical, 6)
                     .padding(.horizontal, 12)
-                    .capsuleStyle()
+//                    .capsuleStyle()
             } else {
                 Text(item.description)
                     .padding(.vertical, 6)
                     .padding(.horizontal, 12)
-                    .capsuleStyle(textColor: .black, backgroundColor: .white, strokeColor: .gray)
+//                    .capsuleStyle(textColor: .secondary, backgroundColor: .white, strokeColor: .separator)
             }
         }
     }

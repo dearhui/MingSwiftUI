@@ -37,7 +37,11 @@ struct MenuPickerCustom_Previews: PreviewProvider {
         MenuPickerCustom(options: ["Option 1", "Option 2"], selection: .constant("Option 2")) { item in
             Text(item.description)
                 .foregroundColor(.primary)
-                .borderedArrowStyle()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .trailingArrowStyle()
+//                .strokedFieldStyle(strokeColor: .separator, backgroundColor: .clear)
+                .padding()
+                .roundedBackgroundStyle(style: .stoked)
         }
         .padding()
     }

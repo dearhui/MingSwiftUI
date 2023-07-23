@@ -15,7 +15,7 @@ public struct StrokedFieldStyle: ViewModifier {
     public var radius: Double
     public var lineWidth: Double
 
-    public init(strokeColor: Color = Color(UIColor.systemPink), backgroundColor: Color? = nil, radius: Double = 8, lineWidth: Double = 1) {
+    public init(strokeColor: Color = .clear, backgroundColor: Color? = nil, radius: Double = 8, lineWidth: Double = 1) {
         self.strokeColor = strokeColor
         self.backgroundColor = backgroundColor
         self.radius = radius
@@ -47,7 +47,10 @@ public struct StrokedFieldStyle: ViewModifier {
 }
 
 public extension View {
-    func strokedFieldStyle(strokeColor: Color = Color(UIColor.systemPink), backgroundColor: Color? = nil, radius: Double = 8, lineWidth: Double = 1) -> some View {
+    func strokedFieldStyle(strokeColor: Color = .clear,
+                           backgroundColor: Color? = nil,
+                           radius: Double = 8,
+                           lineWidth: Double = 1) -> some View {
         modifier(StrokedFieldStyle(strokeColor: strokeColor, backgroundColor: backgroundColor, radius: radius, lineWidth: lineWidth))
     }
 }

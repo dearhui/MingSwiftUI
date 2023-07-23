@@ -77,7 +77,7 @@ struct TagGridView_Previews: PreviewProvider {
             Text(text)
                 .padding(.vertical, 2)
                 .padding(.horizontal, 12)
-                .capsuleStyle()
+//                .capsuleStyle()
         }
     }
 }
