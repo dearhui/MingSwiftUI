@@ -73,11 +73,11 @@ public struct LeadingGridCustom<Content: View, Item: Hashable & CustomStringConv
 
 struct TagGridView_Previews: PreviewProvider {
     static var previews: some View {
-        LeadingGridCustom(tags: ["Hello", "World", "test", "demo", "macbook pro", "apple air pods", "rock", "a"]) { text in
+        LeadingGridCustom(tags: ["Hello", "World", "test", "demo", "macbook", "apple air pods", "rock", "watch"]) { text in
             Text(text)
                 .padding(.vertical, 2)
                 .padding(.horizontal, 12)
-//                .capsuleStyle()
+                .roundedBackgroundStyle(.stroked)
         }
     }
 }

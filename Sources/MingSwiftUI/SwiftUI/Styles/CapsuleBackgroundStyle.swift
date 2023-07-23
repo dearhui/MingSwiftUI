@@ -9,17 +9,23 @@ import SwiftUI
 
 public enum CapsuleBackgroundStyleType {
     case standard
-    case emphasized
-    case custom(backgroundColor: Color?, strokeColor: Color, lineWidth: CGFloat, shadowColor: Color, shadowRadius: CGFloat, shadowOffset: CGSize)
+    case attention
+    case tag
+    case stroked
+    case custom(foregroundColor: Color, backgroundColor: Color?, strokeColor: Color, lineWidth: CGFloat, shadowColor: Color, shadowRadius: CGFloat, shadowOffset: CGSize)
     
-    var parameters: (backgroundColor: Color?, strokeColor: Color, lineWidth: CGFloat, shadowColor: Color, shadowRadius: CGFloat, shadowOffset: CGSize) {
+    var parameters: (foregroundColor: Color, backgroundColor: Color?, strokeColor: Color, lineWidth: CGFloat, shadowColor: Color, shadowRadius: CGFloat, shadowOffset: CGSize) {
         switch self {
         case .standard:
-            return (nil, .clear, 1, .black.opacity(0.25), 3, CGSize(width: 1, height: 2))
-        case .emphasized:
-            return (.accentColor, .clear, 1, .clear, 0, .zero)
-        case .custom(let backgroundColor, let strokeColor, let lineWidth, let shadowColor, let shadowRadius, let shadowOffset):
-            return (backgroundColor, strokeColor, lineWidth, shadowColor, shadowRadius, shadowOffset)
+            return (.primary, nil, .clear, 1, .black.opacity(0.25), 3, CGSize(width: 1, height: 2))
+        case .attention:
+            return (.white, .accentColor, .clear, 1, .clear, 0, .zero)
+        case .tag:
+            return (Color(red: 0.05, green: 0.65, blue: 0.91), Color(red: 0.88, green: 0.95, blue: 1), .clear, 1, .clear, 0, .zero)
+        case .stroked:
+            return (.secondary, .clear, .secondary, 1, .clear, 0, .zero)
+        case .custom(let foregroundColor, let backgroundColor, let strokeColor, let lineWidth, let shadowColor, let shadowRadius, let shadowOffset):
+            return (foregroundColor, backgroundColor, strokeColor, lineWidth, shadowColor, shadowRadius, shadowOffset)
         }
     }
 }
@@ -38,6 +44,7 @@ public struct CapsuleBackgroundStyle: ViewModifier {
         let backgroundColor = parameters.backgroundColor ?? (colorScheme == .dark ? Color.secondarySystemBackground : Color.systemBackground)
         
         return content
+            .foregroundColor(parameters.foregroundColor)
             .background(
                 Capsule()
                     .foregroundColor(backgroundColor)
@@ -61,16 +68,24 @@ struct CapsuleBackgroundStyleModifier_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Text("Hello, World!")
-                .foregroundColor(.white)
-                .padding(.vertical, 6)
-                .padding(.horizontal, 12)
-                .capsuleBackgroundStyle(style: .emphasized)
-                
-            Text("Hello, World!")
-                .foregroundColor(.primary)
                 .padding(.vertical, 6)
                 .padding(.horizontal, 12)
                 .capsuleBackgroundStyle(style: .standard)
+            
+            Text("Hello, World!")
+                .padding(.vertical, 6)
+                .padding(.horizontal, 12)
+                .capsuleBackgroundStyle(style: .attention)
+            
+            Text("Hello, World!")
+                .padding(.vertical, 6)
+                .padding(.horizontal, 12)
+                .capsuleBackgroundStyle(style: .tag)
+
+            Text("Hello, World!")
+                .padding(.vertical, 6)
+                .padding(.horizontal, 12)
+                .capsuleBackgroundStyle(style: .stroked)
         }
         .padding()
     }

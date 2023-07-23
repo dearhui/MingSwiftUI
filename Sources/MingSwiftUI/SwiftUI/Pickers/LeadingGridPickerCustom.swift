@@ -44,14 +44,16 @@ struct LeadingGridPickerCustom_Previews: PreviewProvider {
         LeadingGridPickerCustom(items: Options.allCases, selection: $selection) { (item, selected)  in
             if selected {
                 Text(item.description)
+                    .foregroundColor(.white)
                     .padding(.vertical, 6)
                     .padding(.horizontal, 12)
-//                    .capsuleStyle()
+                    .roundedBackgroundStyle(.buttonColor(.accentColor))
             } else {
                 Text(item.description)
+                    .foregroundColor(.secondary)
                     .padding(.vertical, 6)
                     .padding(.horizontal, 12)
-//                    .capsuleStyle(textColor: .secondary, backgroundColor: .white, strokeColor: .separator)
+                    .roundedBackgroundStyle(.stroked)
             }
         }
     }
