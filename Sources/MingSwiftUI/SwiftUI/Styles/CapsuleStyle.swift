@@ -1,5 +1,5 @@
 //
-//  CapsuleBackgroundStyle.swift
+//  CapsuleStyle.swift
 //  
 //
 //  Created by minghui on 2023/7/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public enum CapsuleBackgroundStyleType {
+public enum CapsuleStyleType {
     case standard
     case attention
     case tag
@@ -30,12 +30,12 @@ public enum CapsuleBackgroundStyleType {
     }
 }
 
-public struct CapsuleBackgroundStyle: ViewModifier {
+public struct CapsuleStyle: ViewModifier {
     @Environment(\.colorScheme) var colorScheme
 
-    public var style: CapsuleBackgroundStyleType
+    public var style: CapsuleStyleType
 
-    public init(style: CapsuleBackgroundStyleType = .standard) {
+    public init(style: CapsuleStyleType = .standard) {
         self.style = style
     }
 
@@ -58,37 +58,37 @@ public struct CapsuleBackgroundStyle: ViewModifier {
 }
 
 public extension View {
-    func capsuleBackgroundStyle(style: CapsuleBackgroundStyleType = .standard) -> some View {
-        self.modifier(CapsuleBackgroundStyle(style: style))
+    func capsuleStyle(_ style: CapsuleStyleType = .standard) -> some View {
+        self.modifier(CapsuleStyle(style: style))
     }
 }
 
-
-struct CapsuleBackgroundStyleModifier_Previews: PreviewProvider {
+struct CapsuleStyleModifier_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Text("Hello, World!")
                 .padding(.vertical, 6)
                 .padding(.horizontal, 12)
-                .capsuleBackgroundStyle(style: .standard)
+                .capsuleStyle(.standard)
             
             Text("Hello, World!")
                 .padding(.vertical, 6)
                 .padding(.horizontal, 12)
-                .capsuleBackgroundStyle(style: .attention)
+                .capsuleStyle(.attention)
             
             Text("Hello, World!")
                 .padding(.vertical, 6)
                 .padding(.horizontal, 12)
-                .capsuleBackgroundStyle(style: .tag)
+                .capsuleStyle(.tag)
 
             Text("Hello, World!")
                 .padding(.vertical, 6)
                 .padding(.horizontal, 12)
-                .capsuleBackgroundStyle(style: .stroked)
+                .capsuleStyle(.stroked)
         }
         .padding()
     }
 }
+
 
 
