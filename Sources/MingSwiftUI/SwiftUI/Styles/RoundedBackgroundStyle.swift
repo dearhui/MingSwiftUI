@@ -9,8 +9,9 @@ import SwiftUI
 
 public enum RoundedBackgroundStyleType {
     case standard // card
-    case stoked
+    case stroked
     case button
+    case buttonColor(Color)
     case field
     case fieldError
     case custom(darkBackgroundColor: Color?, lightBackgroundColor: Color?, strokeColor: Color, radius: CGFloat, lineWidth: CGFloat, shadowColor: Color, shadowRadius: CGFloat, shadowOffset: CGSize)
@@ -19,10 +20,12 @@ public enum RoundedBackgroundStyleType {
         switch self {
         case .standard:
             return (.tertiarySystemBackground, .systemBackground, .clear, 6, 1, .black.opacity(0.25), 3, CGSize(width: 1, height: 2))
-        case .stoked:
+        case .stroked:
             return (.tertiarySystemBackground, .systemBackground, .separator, 6, 1, .clear, 3, .zero)
         case .button:
             return (.accentColor, .accentColor, .clear, 6, 1, .clear, 0, .zero)
+        case .buttonColor(let background):
+            return (background, background, .clear, 6, 1, .clear, 0, .zero)
         case .field:
             return (.tertiarySystemBackground, .systemGroupedBackground, .clear, 6, 1, .clear, 0, .zero)
         case .fieldError:
@@ -74,7 +77,7 @@ struct RoundedBackgroundStyleModifier_Previews: PreviewProvider {
             
             Text("Hello, World!\nHello, World!")
                 .padding()
-                .roundedBackgroundStyle(style: .stoked)
+                .roundedBackgroundStyle(style: .stroked)
 
             Text("Hello, World!")
                 .foregroundColor(.white)
@@ -82,6 +85,13 @@ struct RoundedBackgroundStyleModifier_Previews: PreviewProvider {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()
                 .roundedBackgroundStyle(style: .button)
+            
+            Text("Hello, World!")
+                .foregroundColor(.white)
+                .fontWeight(.semibold)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding()
+                .roundedBackgroundStyle(style: .buttonColor(.yellow))
             
             TextField("Please Input text", text: .constant(""))
                 .padding()

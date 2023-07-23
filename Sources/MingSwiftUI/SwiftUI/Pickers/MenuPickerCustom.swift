@@ -41,7 +41,7 @@ struct MenuPickerCustom_Previews: PreviewProvider {
                 .trailingArrowStyle()
 //                .strokedFieldStyle(strokeColor: .separator, backgroundColor: .clear)
                 .padding()
-                .roundedBackgroundStyle(style: .stoked)
+                .roundedBackgroundStyle(style: .stroked)
         }
         .padding()
     }
