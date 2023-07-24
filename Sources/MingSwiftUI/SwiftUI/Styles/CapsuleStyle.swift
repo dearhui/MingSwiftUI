@@ -41,7 +41,7 @@ public struct CapsuleStyle: ViewModifier {
 
     public func body(content: Content) -> some View {
         let parameters = style.parameters
-        let backgroundColor = parameters.backgroundColor ?? (colorScheme == .dark ? Color.secondarySystemBackground : Color.systemBackground)
+        let backgroundColor = parameters.backgroundColor ?? (colorScheme == .dark ? Color.UIKit.secondarySystemBackground : Color.UIKit.systemBackground)
         
         return content
             .foregroundColor(parameters.foregroundColor)

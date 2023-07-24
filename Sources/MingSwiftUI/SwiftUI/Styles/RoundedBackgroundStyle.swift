@@ -19,17 +19,17 @@ public enum RoundedBackgroundStyleType {
     var parameters: (darkBackgroundColor: Color?, lightBackgroundColor: Color?, strokeColor: Color, radius: CGFloat, lineWidth: CGFloat, shadowColor: Color, shadowRadius: CGFloat, shadowOffset: CGSize) {
         switch self {
         case .standard:
-            return (.tertiarySystemBackground, .systemBackground, .clear, 6, 1, .black.opacity(0.25), 3, CGSize(width: 1, height: 2))
+            return (.UIKit.tertiarySystemBackground, .UIKit.systemBackground, .clear, 6, 1, .black.opacity(0.25), 3, CGSize(width: 1, height: 2))
         case .stroked:
-            return (.tertiarySystemBackground, .systemBackground, .separator, 6, 1, .clear, 3, .zero)
+            return (.UIKit.tertiarySystemBackground, .UIKit.systemBackground, .UIKit.separator, 6, 1, .clear, 3, .zero)
         case .button:
             return (.accentColor, .accentColor, .clear, 6, 1, .clear, 0, .zero)
         case .buttonColor(let background):
             return (background, background, .clear, 6, 1, .clear, 0, .zero)
         case .field:
-            return (.tertiarySystemBackground, .systemGroupedBackground, .clear, 6, 1, .clear, 0, .zero)
+            return (.UIKit.tertiarySystemBackground, .UIKit.systemGroupedBackground, .clear, 6, 1, .clear, 0, .zero)
         case .fieldError:
-            return (.tertiarySystemBackground, .systemGroupedBackground, .pink, 6, 1, .clear, 0, .zero)
+            return (.UIKit.tertiarySystemBackground, .UIKit.systemGroupedBackground, .pink, 6, 1, .clear, 0, .zero)
         case .custom(let darkBackgroundColor, let lightBackgroundColor, let strokeColor, let radius, let lineWidth, let shadowColor, let shadowRadius, let shadowOffset):
             return (darkBackgroundColor, lightBackgroundColor, strokeColor, radius, lineWidth, shadowColor, shadowRadius, shadowOffset)
         }
