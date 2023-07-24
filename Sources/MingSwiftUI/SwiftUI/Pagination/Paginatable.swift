@@ -10,7 +10,6 @@ import SwiftUI
 protocol Paginable {
     associatedtype Item
     static func fetch(page: Int, limit: Int) async throws -> [Item]
-    static var emptyMessage: String { get }
 }
 
 class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identifiable {
@@ -35,49 +34,65 @@ class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identifiable 
         }
     }
     
-    @MainActor
     func fetch() async {
-        currentPage = 1
-        errorNext = nil
-        isLoading = true
+        DispatchQueue.main.async {
+            self.currentPage = 1
+            self.errorNext = nil
+            self.isLoading = true
+        }
         
         defer {
-            self.isLoading = false
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
         }
         do {
             let items = try await paginable.fetch(page: currentPage, limit: limit)
-            self.items = items
+            DispatchQueue.main.async {
+                self.items = items
+            }
         } catch {
-            self.error = error
+            DispatchQueue.main.async {
+                self.error = error
+            }
         }
     }
     
-    @MainActor
     func fetchNext() async {
         guard errorNext == nil else {
             print("request next (\(currentPage)) error: \(errorNext?.localizedDescription ?? "")")
             return
         }
-        
-        currentPage += 1
-        errorNext = nil
-        isNextLoading = true
+            
+        DispatchQueue.main.async {
+            self.currentPage += 1
+            self.errorNext = nil
+            self.isNextLoading = true
+        }
         
         defer {
-            self.isNextLoading = false
+            DispatchQueue.main.async {
+                self.isNextLoading = false
+            }
         }
         do {
             let items = try await paginable.fetch(page: currentPage, limit: limit)
-            self.items.append(contentsOf: items)
+            
+            DispatchQueue.main.async {
+                self.items.append(contentsOf: items)
+            }
         } catch {
-            self.errorNext = error
+            DispatchQueue.main.async {
+                self.errorNext = error
+            }
         }
     }
     
-    @MainActor
     func update(newItem: Item) {
         if let index = items.firstIndex(where: { $0.id == newItem.id }) {
-            items[index] = newItem
+            DispatchQueue.main.async {
+                self.items[index] = newItem
+            }
         }
     }
 }
