@@ -7,14 +7,20 @@
 
 import SwiftUI
 
-struct PaginatedList<Content: View, P: Paginable>: View where P.Item: Identifiable {
+public struct PaginatedList<Content: View, P: Paginable>: View where P.Item: Identifiable {
 
-    @ObservedObject var paginatedStore: PaginatedStore<P>
+    @ObservedObject public var paginatedStore: PaginatedStore<P>
     
-    var spacing: CGFloat = 0
-    let content: (P.Item) -> Content
+    public var spacing: CGFloat = 0
+    public let content: (P.Item) -> Content
 
-    var body: some View {
+    public init(paginatedStore: PaginatedStore<P>, spacing: CGFloat = 0, @ViewBuilder content: @escaping (P.Item) -> Content) {
+        self.paginatedStore = paginatedStore
+        self.spacing = spacing
+        self.content = content
+    }
+
+    public var body: some View {
         LazyVStack (spacing: spacing) {
             ForEach(paginatedStore.items, id: \.id) { item in
                 content(item)
@@ -42,3 +48,4 @@ extension RandomAccessCollection where Self.Element: Identifiable {
         return distance == 1
     }
 }
+

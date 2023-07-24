@@ -7,35 +7,35 @@
 
 import SwiftUI
 
-protocol Paginable {
+public protocol Paginable {
     associatedtype Item
-    static func fetch(start: Int, limit: Int) async throws -> [Item] // 修改 fetch 函數參數
+    static func fetch(start: Int, limit: Int) async throws -> [Item]
 }
 
-class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identifiable {
-    typealias Item = P.Item
+public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identifiable {
+    public typealias Item = P.Item
     
-    @Published var items: [Item] = []
-    @Published var isLoading = false
-    @Published var error: Error?
-    @Published var isNextLoading = false
-    @Published var errorNext: Error?
+    @Published public var items: [Item] = []
+    @Published public var isLoading = false
+    @Published public var error: Error?
+    @Published public var isNextLoading = false
+    @Published public var errorNext: Error?
     
     private var currentStart = 0
     private let paginable: P.Type
     private let limit: Int
     
-    private var currentTask: Task<Void, Never>? // 管理當前任務的實例變數
+    private var currentTask: Task<Void, Never>?
     
-    init(paginable: P.Type, limit: Int = 20) {
+    public init(paginable: P.Type, limit: Int = 20) {
         self.paginable = paginable
         self.limit = limit
         
         fetchData()
     }
     
-    func fetchData(isNext: Bool = false) {
-        cancelTask() // 在開始新任務前取消當前任務
+    public func fetchData(isNext: Bool = false) {
+        cancelTask()
         
         currentTask = Task {
             if isNext {
@@ -88,8 +88,8 @@ class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identifiable 
         }
     }
     
-    func cancelTask() {
-        currentTask?.cancel() // 取消當前任務
+    public func cancelTask() {
+        currentTask?.cancel()
         currentTask = nil
     }
 }

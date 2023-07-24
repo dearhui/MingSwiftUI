@@ -7,28 +7,28 @@
 
 import SwiftUI
 
-protocol Detailable {
+public protocol Detailable {
     associatedtype Item
     func fetch() async throws -> Item
 }
 
-class DetailStore<T: Detailable>: ObservableObject {
-    var item: T {
+public class DetailStore<T: Detailable>: ObservableObject {
+    public var item: T {
         didSet {
             fetch()
         }
     }
     
-    @Published var detail: T.Item?
-    @Published var isLoading = false
-    @Published var error: Error?
+    @Published public var detail: T.Item?
+    @Published public var isLoading = false
+    @Published public var error: Error?
     
-    init(item: T) {
+    public init(item: T) {
         self.item = item
         fetch()
     }
     
-    func fetch() {
+    public func fetch() {
         Task {
             defer {
                 DispatchQueue.main.async {
@@ -56,4 +56,5 @@ class DetailStore<T: Detailable>: ObservableObject {
         }
     }
 }
+
 
