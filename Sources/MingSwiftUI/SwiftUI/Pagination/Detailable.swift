@@ -8,8 +8,9 @@
 import SwiftUI
 
 public protocol Detailable {
-    associatedtype Item
-    func fetch() async throws -> Item
+    associatedtype DetailType
+    
+    func detail() async throws -> DetailType
 }
 
 public class DetailStore<T: Detailable>: ObservableObject {
@@ -19,7 +20,7 @@ public class DetailStore<T: Detailable>: ObservableObject {
         }
     }
     
-    @Published public var detail: T.Item?
+    @Published public var detail: T.DetailType?
     @Published public var isLoading = false
     @Published public var error: Error?
     
@@ -43,7 +44,7 @@ public class DetailStore<T: Detailable>: ObservableObject {
                     self.isLoading = true
                 }
                 
-                let detail = try await item.fetch()
+                let detail = try await item.detail()
                 
                 DispatchQueue.main.async {
                     self.detail = detail
