@@ -20,9 +20,7 @@ struct PaginatedList<Content: View, P: Paginable>: View where P.Item: Identifiab
                 content(item)
                     .onAppear {
                         if paginatedStore.items.isLastItem(item) {
-                            Task {
-                                await paginatedStore.fetchNext()
-                            }
+                            paginatedStore.fetchData(isNext: true)
                         }
                     }
             }
