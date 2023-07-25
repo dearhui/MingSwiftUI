@@ -8,13 +8,13 @@
 import SwiftUI
 
 @available(iOS 15, *)
-struct FocusStateModifier<Value: Hashable>: ViewModifier where Value: Hashable {
-    @Binding var focusState: Value?
-    var equals: Value
+public struct FocusStateModifier<Value: Hashable>: ViewModifier where Value: Hashable {
+    @Binding public var focusState: Value?
+    public var equals: Value
 
     @FocusState private var internalFocusState: Value?
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .focused($internalFocusState, equals: equals)
             .onChange(of: focusState) { newValue in
@@ -26,17 +26,17 @@ struct FocusStateModifier<Value: Hashable>: ViewModifier where Value: Hashable {
     }
 }
 
-struct FocusStateLegacyModifier<Value: Hashable>: ViewModifier where Value: Hashable {
-    @Binding var focusState: Value?
-    var equals: Value
+public struct FocusStateLegacyModifier<Value: Hashable>: ViewModifier where Value: Hashable {
+    @Binding public var focusState: Value?
+    public var equals: Value
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .focusedLegacy($focusState, equals: equals)
     }
 }
 
-extension View {
+public extension View {
     @ViewBuilder
     func universalFocused<Value: Hashable>(_ focus: Binding<Value?>, equals value: Value) -> some View {
         if #available(iOS 15, *) {
