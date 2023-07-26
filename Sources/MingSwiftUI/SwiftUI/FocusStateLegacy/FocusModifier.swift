@@ -22,7 +22,9 @@ public struct FocusModifier<Value: Hashable>: ViewModifier {
                 }
                 
                 if focusedField == equals {
-                    textField.becomeFirstResponder()
+                    DispatchQueue.main.async {
+                        textField.becomeFirstResponder()
+                    }
                 }
             }
             .simultaneousGesture(TapGesture().onEnded {

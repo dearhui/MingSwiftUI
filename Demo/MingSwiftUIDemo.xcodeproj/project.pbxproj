@@ -12,6 +12,7 @@
 		1C1E97D22A70077F00A7FB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C1E97D12A70077F00A7FB5B /* Assets.xcassets */; };
 		1C1E97D62A70077F00A7FB5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C1E97D52A70077F00A7FB5B /* Preview Assets.xcassets */; };
 		1C1E97DF2A70085800A7FB5B /* FocusedDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1E97DE2A70085800A7FB5B /* FocusedDemoView.swift */; };
+		1C2B3FC82A70E83100B56B04 /* FocusedDemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2B3FC72A70E83100B56B04 /* FocusedDemoViewModel.swift */; };
 		1CF5702F2A70119A00806816 /* MingSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1CF5702E2A70119A00806816 /* MingSwiftUI */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		1C1E97D32A70077F00A7FB5B /* MingSwiftUIDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MingSwiftUIDemo.entitlements; sourceTree = "<group>"; };
 		1C1E97D52A70077F00A7FB5B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1C1E97DE2A70085800A7FB5B /* FocusedDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedDemoView.swift; sourceTree = "<group>"; };
+		1C2B3FC72A70E83100B56B04 /* FocusedDemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedDemoViewModel.swift; sourceTree = "<group>"; };
 		1CF5702D2A70118C00806816 /* MingSwiftUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MingSwiftUI; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +63,7 @@
 			children = (
 				1C1E97CD2A70077E00A7FB5B /* MingSwiftUIDemoApp.swift */,
 				1C1E97DE2A70085800A7FB5B /* FocusedDemoView.swift */,
+				1C2B3FC72A70E83100B56B04 /* FocusedDemoViewModel.swift */,
 				1C1E97CF2A70077E00A7FB5B /* ContentView.swift */,
 				1C1E97D12A70077F00A7FB5B /* Assets.xcassets */,
 				1C1E97D32A70077F00A7FB5B /* MingSwiftUIDemo.entitlements */,
@@ -168,6 +171,7 @@
 				1C1E97DF2A70085800A7FB5B /* FocusedDemoView.swift in Sources */,
 				1C1E97D02A70077E00A7FB5B /* ContentView.swift in Sources */,
 				1C1E97CE2A70077E00A7FB5B /* MingSwiftUIDemoApp.swift in Sources */,
+				1C2B3FC82A70E83100B56B04 /* FocusedDemoViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

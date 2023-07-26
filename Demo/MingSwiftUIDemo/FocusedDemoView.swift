@@ -31,14 +31,19 @@ struct FocusedDemoView: View {
     
 //    @FocusState private var focusedField: Field?
     @FocusStateLegacy private var focusedField: Field?
+    
+    @StateObject private var viewModel = FocusedDemoViewModel()
 
     var body: some View {
         VStack (spacing: 20) {
-            TextField("Username", text: $username)
+            TextField("Username", text: $viewModel.username) {
+                focusedField = nil
+            }
                 .padding()
                 .roundedBackgroundStyle(.field)
 //                .focused($focusedField, equals: .username)
                 .focusedLegacy($focusedField, equals: .username)
+                .submitLabel(.next)
             
             SecureField("Password", text: $password)
                 .padding()
