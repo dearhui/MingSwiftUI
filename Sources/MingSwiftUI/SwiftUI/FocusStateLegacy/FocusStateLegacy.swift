@@ -23,7 +23,13 @@ import SwiftUI
         }
         
         nonmutating set {
-            form = newValue
+            self.form = newValue
+            
+            if newValue == nil {
+                DispatchQueue.main.async {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+            }
         }
     }
     

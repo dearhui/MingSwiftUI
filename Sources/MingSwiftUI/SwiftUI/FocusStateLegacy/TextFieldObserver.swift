@@ -9,24 +9,21 @@ import UIKit
 
 class TextFieldObserver: NSObject, UITextFieldDelegate {
     var onReturnTap: () -> () = {}
-    var onEditingBegin: () -> () = {}
-    var onEditingEnd: () -> () = {}
     weak var forwardToDelegate: UITextFieldDelegate?
     
     @available(iOS 2.0, *)
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return forwardToDelegate?.textFieldShouldBeginEditing?(textField) ?? true
+        forwardToDelegate?.textFieldShouldBeginEditing?(textField) ?? true
     }
 
     @available(iOS 2.0, *)
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        onEditingBegin()
         forwardToDelegate?.textFieldDidBeginEditing?(textField)
     }
 
     @available(iOS 2.0, *)
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        return forwardToDelegate?.textFieldShouldEndEditing?(textField) ?? true
+        forwardToDelegate?.textFieldShouldEndEditing?(textField) ?? true
     }
 
     @available(iOS 2.0, *)
@@ -36,7 +33,6 @@ class TextFieldObserver: NSObject, UITextFieldDelegate {
 
     @available(iOS 10.0, *)
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        onEditingEnd()
         forwardToDelegate?.textFieldDidEndEditing?(textField)
     }
 
