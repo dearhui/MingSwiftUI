@@ -38,6 +38,7 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
     
     public func updateParameters(_ newParameters: P.Parameters) {
         self.parameters = newParameters
+        self.currentStart = 0
         fetchData()
     }
     
