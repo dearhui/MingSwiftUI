@@ -9,7 +9,8 @@ import SwiftUI
 
 public protocol Paginable {
     associatedtype Item
-    static func fetch(start: Int, limit: Int) async throws -> [Item]
+    associatedtype Parameters
+    static func fetch(start: Int, limit: Int, parameters: Parameters?) async throws -> [Item]
 }
 
 public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identifiable {
@@ -21,6 +22,7 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
     @Published public var isNextLoading = false
     @Published public var errorNext: Error?
     
+    private var parameters: P.Parameters?
     private var currentStart = 0
     private let paginable: P.Type
     private let limit: Int
@@ -31,6 +33,11 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
         self.paginable = paginable
         self.limit = limit
         
+        fetchData()
+    }
+    
+    public func updateParameters(_ newParameters: P.Parameters) {
+        self.parameters = newParameters
         fetchData()
     }
     
@@ -67,7 +74,7 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
             }
             
             do {
-                let newItems = try await paginable.fetch(start: currentStart, limit: limit)
+                let newItems = try await paginable.fetch(start: currentStart, limit: limit, parameters: self.parameters)
                 DispatchQueue.main.async {
                     if isNext {
                         self.items.append(contentsOf: newItems)
