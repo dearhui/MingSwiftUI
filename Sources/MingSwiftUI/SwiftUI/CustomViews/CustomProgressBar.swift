@@ -28,7 +28,7 @@ public struct CustomProgressBar: View {
                 Rectangle()
                     .foregroundColor(foregroundColor)
                     .cornerRadius(21)
-                    .frame(width: geometry.size.width * CGFloat(percentage))
+                    .frame(width: geometry.size.width * CGFloat(min(max(self.percentage, 0), 1)))  // 這裡添加了範圍檢查
             }
         }
     }
@@ -42,5 +42,6 @@ struct CustomProgressBar_Previews: PreviewProvider {
             backgroundColor: .gray
         )
         .frame(height: 6)
+        .padding()
     }
 }
