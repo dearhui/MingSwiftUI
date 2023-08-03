@@ -29,9 +29,10 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
     
     private var currentTask: Task<Void, Never>?
     
-    public init(paginable: P.Type, limit: Int = 20) {
+    public init(paginable: P.Type, limit: Int = 20, parameters: P.Parameters?) {
         self.paginable = paginable
         self.limit = limit
+        self.parameters = parameters
         
         fetchData()
     }
