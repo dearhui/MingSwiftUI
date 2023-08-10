@@ -8,12 +8,12 @@
 import SwiftUI
 
 public protocol Paginable {
-    associatedtype Item
+    associatedtype Item: Identifiable
     associatedtype Parameters
     static func fetch(start: Int, limit: Int, parameters: Parameters?) async throws -> [Item]
 }
 
-public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identifiable {
+public class PaginatedStore<P: Paginable>: ObservableObject {
     public typealias Item = P.Item
     
     @Published public var items: [Item] = []
@@ -118,5 +118,21 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
     public func cancelTask() {
         currentTask?.cancel()
         currentTask = nil
+    }
+    
+    public func delete(item: Item) -> Bool {
+        if let index = items.firstIndex(where: { $0.id == item.id }) {
+            items.remove(at: index)
+            return true
+        }
+        return false
+    }
+    
+    public func update(item: Item) -> Bool {
+        if let index = items.firstIndex(where: { $0.id == item.id }) {
+            items[index] = item
+            return true
+        }
+        return false
     }
 }
