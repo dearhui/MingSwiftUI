@@ -17,10 +17,16 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
     public typealias Item = P.Item
     
     @Published public var items: [Item] = []
-    @Published public var isLoading = false
+    @Published public var isLoading = false {
+        didSet {
+            debugPrint("PaginatedStore isLoading:\(isLoading)")
+        }
+    }
     @Published public var error: Error?
     @Published public var isNextLoading = false
     @Published public var errorNext: Error?
+    @Published public var isEmpty: Bool = false
+    private var hasMoreItems: Bool = true
     
     private var parameters: P.Parameters?
     private var currentStart = 0
@@ -34,12 +40,15 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
         self.limit = limit
         self.parameters = parameters
         
+        debugPrint("PaginatedStore fetchData 0")
         fetchData()
     }
     
     public func updateParameters(_ newParameters: P.Parameters) {
+        debugPrint("PaginatedStore fetchData 1")
         self.parameters = newParameters
         self.currentStart = 0
+        self.items = []
         fetchData()
     }
     
@@ -52,6 +61,11 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
                     print("request next (\(currentStart)) error: \(errorNext?.localizedDescription ?? "")")
                     return
                 }
+                
+                guard hasMoreItems else {
+                    print("request next no more items.")
+                    return
+                }
             }
             
             DispatchQueue.main.async {
@@ -59,6 +73,7 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
                     self.errorNext = nil
                     self.isNextLoading = true
                 } else {
+                    debugPrint("PaginatedStore fetchData 2")
                     self.currentStart = 0
                     self.error = nil
                     self.isLoading = true
@@ -70,6 +85,7 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
                     if isNext {
                         self.isNextLoading = false
                     } else {
+                        debugPrint("PaginatedStore fetchData 3")
                         self.isLoading = false
                     }
                 }
@@ -82,8 +98,10 @@ public class PaginatedStore<P: Paginable>: ObservableObject where P.Item: Identi
                         self.items.append(contentsOf: newItems)
                     } else {
                         self.items = newItems
+                        self.isEmpty = self.items.isEmpty
                     }
                     self.currentStart += newItems.count
+                    self.hasMoreItems = newItems.count == self.limit
                 }
             } catch {
                 DispatchQueue.main.async {
