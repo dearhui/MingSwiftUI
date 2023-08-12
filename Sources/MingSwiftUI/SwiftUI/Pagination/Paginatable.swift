@@ -135,4 +135,12 @@ public class PaginatedStore<P: Paginable>: ObservableObject {
         }
         return false
     }
+    
+    public func refresh() {
+        currentStart = 0 // Reset the start to 0
+        hasMoreItems = true // Reset the flag for more items
+        fetchData() // Fetch the data starting from the beginning
+    }
+    
+    
 }
