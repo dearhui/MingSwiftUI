@@ -56,6 +56,30 @@ public class DetailStore<T: Detailable>: ObservableObject {
             }
         }
     }
+    
+    public func refresh() async throws {
+        do {
+            await MainActor.run {
+                error = nil
+                isLoading = true
+            }
+            
+            do {
+                let detail = try await item.detail()
+                
+                await MainActor.run {
+                    self.detail = detail
+                    self.isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    self.error = error
+                    self.isLoading = false
+                }
+                throw error
+            }
+        }
+    }
 }
 
 

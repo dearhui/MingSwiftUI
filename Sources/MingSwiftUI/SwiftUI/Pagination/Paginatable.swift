@@ -17,11 +17,7 @@ public class PaginatedStore<P: Paginable>: ObservableObject {
     public typealias Item = P.Item
     
     @Published public var items: [Item] = []
-    @Published public var isLoading = false {
-        didSet {
-            debugPrint("PaginatedStore isLoading:\(isLoading)")
-        }
-    }
+    @Published public var isLoading = false
     @Published public var error: Error?
     @Published public var isNextLoading = false
     @Published public var errorNext: Error?
@@ -40,12 +36,10 @@ public class PaginatedStore<P: Paginable>: ObservableObject {
         self.limit = limit
         self.parameters = parameters
         
-        debugPrint("PaginatedStore fetchData 0")
         fetchData()
     }
     
     public func updateParameters(_ newParameters: P.Parameters) {
-        debugPrint("PaginatedStore fetchData 1")
         self.parameters = newParameters
         self.currentStart = 0
         self.items = []
