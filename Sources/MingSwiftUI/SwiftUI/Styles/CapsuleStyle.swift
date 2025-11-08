@@ -19,7 +19,7 @@ public enum CapsuleStyleType {
         case .standard:
             return (.primary, nil, .clear, 1, .black.opacity(0.25), 3, CGSize(width: 1, height: 2))
         case .attention:
-            return (.white, .accentColor, .clear, 1, .clear, 0, .zero)
+            return (.white, Color(UIColor.systemBlue), .clear, 1, .clear, 0, .zero)
         case .tag:
             return (Color(red: 0.05, green: 0.65, blue: 0.91), Color(red: 0.88, green: 0.95, blue: 1), .clear, 1, .clear, 0, .zero)
         case .stroked:
